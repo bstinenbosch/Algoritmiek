@@ -38,32 +38,24 @@ public class Solution {
 	    boolean possible = false;
 	    GraphIterator iter = new GraphIterator(g, v);
 	    while (iter.hasNext()) {
-	      Vertex vertex = iter.next();
-	      queue.add(vertex);
-	      if (vertex==u) possible = true;
+	      if (iter.next()==u) possible = true;
 	    }
 	    if (!possible) return -1;
 	    
 	    // if possible:
 	    Vertex vertex = v;
-	    int outgoingEdges = g.getNeighbours(vertex).size();
-	    for (Edge edge : g.getNeighbours(vertex)) {
-	      Vertex to = edge.getTo();
-	      if (to.getWeight() == Integer.MAX_VALUE) to.setWeight(0);
-	      to.setWeight(edge.getWeight() + outgoingEdges);
-	      queue.add(to);
-	    }
-	    queue.remove(vertex);
+	    vertex.setWeight(0);
+	    queue.add(vertex);
 	    
 	    // Dijkstra's algorithm
-	    while (vertex!=null) { // is this statement correct?
+	    while (!queue.isEmpty()) {
 	      vertex = queue.poll();
 	      if (vertex!=null) {
 	    	if (vertex == u) {
 	    		return vertex.getWeight();
 	    	}
 	        if (g.hasNeighbours(vertex)) {
-	        	outgoingEdges = g.getNeighbours(vertex).size();
+	        	int outgoingEdges = g.getNeighbours(vertex).size();
 		        for (Edge edge : g.getNeighbours(vertex)) {
 		          Vertex to = edge.getTo();
 		          if (to.getWeight() == Integer.MAX_VALUE) to.setWeight(0);
