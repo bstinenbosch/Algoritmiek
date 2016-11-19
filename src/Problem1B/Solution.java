@@ -34,13 +34,13 @@ public class Solution {
     
 	    if (v==u) return 0; // if same
 	    
-	    // check if nodes are in the same component
+	    /*/ check if nodes are in the same component
 	    boolean possible = false;
 	    GraphIterator iter = new GraphIterator(g, v);
 	    while (iter.hasNext()) {
 	      if (iter.next()==u) possible = true;
 	    }
-	    if (!possible) return -1;
+	    if (!possible) return -1;*/
 	    
 	    // if possible:
 	    Vertex vertex = v;
